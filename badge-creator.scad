@@ -1,13 +1,20 @@
 use <qrcode.scad>
 
 /* [global] */
-model="namebadge"; // [namebadge: Name badge, keychain: Key Chain, shoppingcoin: Shopping coin] 
-length=85.0; // .1
-width=55.0;  // .1
+basemodel="square"; // [square: Square, circle: Circle] 
+length=85.0; 
+width=55.0; 
 height=2.0;  // .1
-dia=4.0;     // .1
+diameter=23.0;     // .1
+edges=50;  // [3:100]
+upper_left_edge_diameter=16; 
+upper_right_edge_diameter=4; 
+lower_right_edge_diameter=4; 
+lower_left_edge_diameter=16; 
+
 textheight=1.0;  // .1
 engrave=false;
+magnets=false;
 
 /* [1. text line] */
 txt1="<Organization>";
@@ -30,60 +37,42 @@ fnt3size=8;
 x3ofs=-10.0;  // .1
 y3ofs=-19.0; // .1
 
-/* [Icon] */
-icon="";
-iconfnt="font awesome 6 brands";
-iconsize=8;
-xiconofs=-32.0;  // .1
-yiconofs=-19.0; // .1
+/* [4. text line] */
+txt4="";
+fnt4="font awesome 6 brands";
+fnt4size=8;
+x4ofs=-32.0;  // .1
+y4ofs=-19.0; // .1
 
 /* [Logo] */
+logofile="svg"; // [svg:SVG File, qrcode:QR Code File]
 logo="oshw.svg";
 xlogoofs=5.0;  // .1
 ylogoofs=-20.0; // .1
 logoscale=0.7;  // .02
 
-/* [options] */
-magnets=false;
-qrcode=false;
-
 /* [Hidden] */
 $fn=30;
 
 
-module shoppingCoin(l=23.0, ht=2.4) {
+module roundBadge(l=23.0, ht=2.4) {
     difference(){
         union(){
                 difference(){
-                    cylinder(r=l/2, h=ht+textheight, $fn=50);
-                    translate([0,0,ht]) cylinder(r=l/2-1.5, h=textheight, $fn=50);
+                    cylinder(r=l/2, h=ht+textheight, $fn=edges);
+                    translate([0,0,ht]) cylinder(r=l/2-1.5, h=textheight, $fn=edges);
                 }
         }
     }
 }
 
-module keyChain(l=95.0, w=16.0, h=2.0) {
- difference() {
-    hull() {
-        translate([-l/2.0,0,0]) cylinder(d=w,h=2);
-        translate([l/2.0,w/2.0-2.0,0]) cylinder(d=4,h=2);  
-        translate([l/2.0,-(w/2.0-2),0]) cylinder(d=4,h=2);  
-    }
-    translate([-(l/2.0+w/2.0-4.0),0,0]) cylinder(d=4,h=3);
-    }
-    difference() {
-        translate([-(l/2.0+w/2.0-4.0),0,2.0]) cylinder(d=6,h=1);
-        translate([-(l/2.0+w/2.0-4.0),0,2.0]) cylinder(d=4,h=3);
-    }
-}
-
-module nameBadge(l=85.0, w=55.0, ht=2.0, edge=4.0) {
+module squareBadge(l=85.0, w=55.0, ht=2.0) {
  difference() {
     hull(){
-        translate([l/2.0-edge/2.0,w/2.0-edge/2.0,0]) cylinder(d=edge,h=ht);  
-        translate([-(l/2.0-edge/2.0),-(w/2.0-edge/2.0),0]) cylinder(d=edge,h=ht);  
-        translate([-(l/2.0-edge/2.0),w/2.0-edge/2.0,0]) cylinder(d=edge,h=ht);  
-        translate([l/2.0-edge/2.0,-(w/2.0-edge/2.0),0]) cylinder(d=edge,h=ht);  
+        translate([-(l/2.0-upper_left_edge_diameter/2.0) ,   w/2.0-upper_left_edge_diameter/2.0,0])   cylinder(d=upper_left_edge_diameter,h=ht);  
+        translate([ (l/2.0-upper_right_edge_diameter/2.0),   w/2.0-upper_right_edge_diameter/2.0,0])  cylinder(d=upper_right_edge_diameter,h=ht);  
+        translate([ (l/2.0-lower_right_edge_diameter/2.0), -(w/2.0-lower_right_edge_diameter/2.0),0]) cylinder(d=lower_right_edge_diameter,h=ht);  
+        translate([-(l/2.0-lower_left_edge_diameter/2.0) , -(w/2.0-lower_left_edge_diameter/2.0),0])  cylinder(d=lower_left_edge_diameter,h=ht);  
     }
     if (magnets == true) {
         translate([0,0,0]) cylinder(d=8.3,h=ht/2);
@@ -103,57 +92,45 @@ module labeling() {
     if (txt3!="") {
         translate([x3ofs,y3ofs,0]) color("black") linear_extrude(textheight) text(txt3, font=fnt3, size=fnt3size, halign = "center", valign="center");
     }
-    if (icon != "") {
-        translate([xiconofs,yiconofs,0]) color("black") linear_extrude(textheight) text(icon, font=iconfnt, size=iconsize, halign = "center", valign="center");
+    if (txt4 != "") {
+        translate([x4ofs,y4ofs,0]) color("black") linear_extrude(textheight) text(txt4, font=fnt4, size=fnt4size, halign = "center", valign="center");
     }
     if (logo != "") {
-        translate([xlogoofs,ylogoofs,0]) color("black") linear_extrude(textheight) scale([logoscale,logoscale,logoscale]) import(file=logo); 
-    }
-    if (qrcode == true) {
-        translate([xlogoofs,ylogoofs,0]) color("black") scale([logoscale,logoscale,logoscale]) qr_render(); 
+        if (logofile == "svg") {
+            translate([xlogoofs,ylogoofs,0]) color("black") linear_extrude(textheight) scale([logoscale,logoscale,logoscale]) import(file=logo); 
+        }
+        else if (logofile == "qrcode") {
+            translate([xlogoofs,ylogoofs,0]) color("black") scale([logoscale,logoscale,logoscale]) qr_render(); 
+        }
     }
 }
 
 
-if (model == "namebadge") {
+if (basemodel == "square") {
     if (engrave == true) {
         difference() {
-            nameBadge(length,width,height,dia);
+            squareBadge(length,width,height);
             translate([0,0,height]) labeling();
             translate([0,0,height-textheight]) labeling();
         }
             
     }
     else {
-        nameBadge(length,width,height,dia);
+        squareBadge(length,width,height);
         translate([0,0,height]) labeling();
     }
 }
-else if (model == "keychain") {
+else if (basemodel == "circle") {
     if (engrave == true) {
         difference() {
-            keyChain(length,width,height);
+            roundBadge(diameter,height);
             translate([0,0,height]) labeling();
             translate([0,0,height-textheight]) labeling();
         }
             
     }
     else {
-        keyChain(length,width,height);
-        translate([0,0,height]) labeling();
-    }
-}
-else if (model == "shoppingcoin") {
-    if (engrave == true) {
-        difference() {
-            shoppingCoin(length,height);
-            translate([0,0,height]) labeling();
-            translate([0,0,height-textheight]) labeling();
-        }
-            
-    }
-    else {
-        shoppingCoin(length,height);
+        roundBadge(diameter,height);
         translate([0,0,height]) labeling();
     }
 }
