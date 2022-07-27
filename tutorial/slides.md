@@ -131,24 +131,148 @@ Kommen wir zum eigentlichen Thema die Programmierung von SCAD. Die Befehlsübers
 # 3D Grundkörper
 
 Anfangen wollen wir mit den 3D Grundkörper. Davon gibt es nur ein paar wenige:
-* Kugel (sphere)
-* Zylinder (cylinder)
 * Würfel (cube)
+* Zylinder (cylinder)
+* Kugel (sphere)
 * Polyeder (polyhedron)
 
 ---
 
-# Positionieren von Objekten
+# Würfel, Quader
 
-Zum Positionieren eines 3D Objektes im 3 dimensionalen Raum gibt es die beiden Befehle:
+Syntax: cube(l); cube(l, center=true); cube([x,y,z]);
+
+Der Befehl cube zeichnet einen Würfel mit der Kantenlänge als Parameter. Einen Quader zeichnet man durch Angabe der x,y,z Kantenlänge in eckigen Klammern. Der optionale Parameter center=true zentriert den Würfel 
+
+---
+
+# Beispiele cube
+
+Die folgenden Beispiele zeichnen einen Würfel mit 10mm Kantenläge, einen zentrierten Würfel mit 10mm Kantenläge und einen Quader mit 30x20x10mm (x,y,z) Kantenlänge.
+
+cube(10); cube(10, center=true); cube([30,20,10]);
+
+![width:300px](cube10.png) ![width:300px](cube30x20x10.png) ![width:300px](cube10-center.png)
+
+---
+
+# Zylinder, Kegel
+
+Syntax: cylinder(r,h)
+
+Der Befehl cylinder zeichnet einen Zylinder. Als Parameter kann der Radius r oder der Durchmesser und die Höhe h angegeben werden. Für einen Kegel gibt man r1 für den unteren Radius und r2 für den oberen Radius, bzw  d1 und d2 für den Durchmesser an.
+
+---
+
+# Beispiele cylinder
+
+Die folgenden Beispiele zeichen einen Zylinder, einen spitzen und einen stumpfen Kegel. 
+cylinder(h=30, r=10); 
+cylinder(h=30, r1=10, r2=0, center=0); cylinder(h=30, r1=10, r2=5, center=0);
+
+![width:300px](cylinder.png) ![width:300px](kegel.png) ![width:300px](kegel-stumpf.png) 
+
+---
+
+# Kugel
+
+Der Befehl sphere zeichnet eine Kugel. Als Parameter gibt man den Radius r oder den Durchmesser d an. 
+Die Anzahl der Ecken kann über den Parameter $fn bestimmt werden. Je höher desto feiner aufgelöst wird die dargestellte Kugel (8,30,100)
+
+![width:300px](sphere-8eckig.png) ![width:300px](sphere.png) ![width:300px](sphere-100eckig.png)
+
+---
+
+# Bewegen von Objekten
+
+Zum Bewegen eines 3D Objektes im 3 dimensionalen Raum gibt es die beiden Befehle:
 * translate - zum Positionieren des Objekts in x,y, und z-Richtung
-* rotate - zum Drehen eines Objektes um die x, y, oder z-Achse. Die Parameter werden jeweils in eckigen Klammern mit Komma getrennt angegeben, so verschiebt z.B. der folgende Befehle 
-translate([10,20,30]) cube(10);
-einen Würfel um 10mm in x-Richtung, 20mm in y-Richtung und 30mm in z-Richtung
+* rotate - zum Drehen eines Objektes um die x, y, oder z-Achse. 
+
+Die Parameter für x, y und z werden jeweils in eckigen Klammern mit Komma getrennt angegeben.
+
+---
+
+# Verschieben - translate
+
+Syntax: translate([x,y,z]) object();
+ 
+Translate bewegt ein Objekt in x-, y- bzw. z-Richtung.
+
+---
+
+# Beispiel translate
+
+Der folgende Befehl verschiebt einen Würfel um 10mm in x-Richtung, 0mm in y-Richtung und 5mm in z-Richtung.
+
+translate([10,0,5]) cube(10);
+
+![width:400px](cube10-translate.png)
+
+---
+
+# Rotate 
+
+Syntax rotate([x,y,z]) object();
+
+Rotate rotiert ein Objekt um die  x-, y- bzw. z-Achse.
+
+---
+
+# Beispiel rotate
+
+Der folgende Befehle rotiert einen Würfel um 45° um die x-Achse. 
+
+rotate([45,0,0]) cube(10, true);
+
+Beachte hier, dass der Würfel zentriert ist (center=true). Dann liegt die Rotations-Achse im Mittelpunkt des Würfels.
+
+![width:400px](cube10-rotate.png)
 
 ---
 
 # 2. Übung
 
-Mit den bisher vorgestellten Befehlen lässt sich bereits einges anfangen. Als Übung soll eine aus Grundkörpern zusammengesetze Figur oder Gegenstand erstellt werden, z.B. ein Tier oder oder ein Haus.
+Mit den bisher vorgestellten Befehlen lässt sich bereits einges anfangen. Als Übung soll eine aus Grundkörpern zusammengesetze Gebäude erstellt werden, z.B. ein Haus, ein Turm, oder eine Brücke. Benutze translate und rotate um die Grundkörper im Raum anzuordnen bzw. zu drehen.
 
+![width:300px](haus.png) ![width:300px](turm.png) ![width:300px](bruecke.png)
+
+---
+
+# Mengenoperationen
+
+Zu den Mengenoperationen (boolsche Operationen) in OpenSCAD zählen:
+
+* Zusammenfassen - union
+* Differenz - difference
+* Schnittmenge - intersection
+
+---
+
+# Zusammenfassen - union
+
+Syntax: union() { object1(); object2(); }
+
+Der Befehl union fasst mehrere Objekte zu einem Objekt zusammen. Auf das zusammengefasste Objekt können dann andere OPerationen wie verschieben (translate), rotieren (rotate) etc. angewandt werden.
+
+![width:300px](union.png)
+
+---
+
+# Differenz - difference
+
+Syntax: difference() { object1(); object2(); }
+
+Der Befehl difference zieht vom ersten angegebenen Objekt die folgenden Objekte ab.
+
+![width:300px](difference.png) ![width:300px](difference-hollow.png)
+
+---
+
+# Schnittmenge - intersection
+
+Syntax: intersection() { object1(); object2(); }
+
+Der Befehl intersection bildet die Schnittmenge von Objekten.
+
+![width:300px](intersection.png) 
