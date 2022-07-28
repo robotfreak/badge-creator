@@ -1,21 +1,31 @@
 use <qrcode.scad>
 
 /* [global] */
-basemodel="square"; // [square: Square, circle: Circle] 
-length=85.0; 
-width=55.0; 
+basemodel="square"; // [square:Square, circle:Circle, svg:SVG File] 
 height=2.0;  // .1
+textheight=1.0;  // .1
+engrave=false;
+magnets=false;
+keyhole=false;
+/* [Round options] */
 diameter=23.0;     // .1
 edges=50;  // [3:100]
+/* [Square options] */
+length=85.0; 
+width=55.0; 
 upper_left_edge_diameter=16; 
 upper_right_edge_diameter=4; 
 lower_right_edge_diameter=4; 
 lower_left_edge_diameter=16; 
-
-textheight=1.0;  // .1
-engrave=false;
-magnets=false;
-
+/* [SVG options] */
+svgfile="bone.svg";
+svgscale=1.0;  // .02
+svgxofs=-60;
+svgyofs=-35;
+/* [Keyhole options] */
+keyholemode="round"; // [round:Round, slot:Slot]
+keyholexofs=0;
+keyholeyofs=0;
 /* [1. text line] */
 txt1="<Organization>";
 fnt1="Ubuntu";
@@ -82,6 +92,10 @@ module squareBadge(l=85.0, w=55.0, ht=2.0) {
    }
 }
 
+module svgBadge(ht=2.4) {
+    translate([svgxofs,svgyofs, 0]) linear_extrude(ht) scale([svgscale,svgscale,svgscale]) import(file=svgfile, center=true); 
+}
+
 module labeling() {
     if (txt1 != "") {
         translate([x1ofs,y1ofs,0]) color("black") linear_extrude(textheight) text(txt1, font=fnt1, size=fnt1size, halign = "center", valign="center");
@@ -133,4 +147,42 @@ else if (basemodel == "circle") {
         roundBadge(diameter,height);
         translate([0,0,height]) labeling();
     }
+}
+else if (basemodel == "svg") {
+    if (engrave == true) {
+        difference() {
+            svgBadge(height);
+            translate([0,0,height]) labeling();
+            translate([0,0,height-textheight]) labeling();
+        }
+            
+    }
+    else {
+        svgBadge(height);
+        translate([0,0,height]) labeling();
+    }
+}
+if (keyhole == true) {
+    translate([keyholexofs, keyholeyofs,0]) {
+        if (keyholemode == "round") {
+            difference() {
+                cylinder(h=height+textheight, d=6);
+                cylinder(h=height+textheight, d=3);
+            }
+        }
+        else if (keyholemode == "slot") {
+            difference() {
+                hull() {
+                    translate([6,0,0]) cylinder(h=height+textheight, d=6);
+                    translate([-6,0,0]) cylinder(h=height+textheight, d=6);
+                }
+                hull() {
+                    translate([5,0,0]) cylinder(h=height+textheight, d=2);
+                    translate([-5,0,0]) cylinder(h=height+textheight, d=2);
+                }
+                cylinder(h=height+textheight, d=3);
+            }
+        }
+    }
+        
 }
