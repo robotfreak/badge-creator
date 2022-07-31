@@ -1,3 +1,7 @@
+// Basiskurs OpenSCAD
+// cylinder.scad
+// (c) berlincreators.de
+
 // Cylinder h=40mm r=10mm
 cylinder(h=40, r=10);
 // Cylinder h=40mm r=10mm (zentriert)

@@ -1,3 +1,7 @@
+// Basiskurs OpenSCAD
+// cube.scad
+// (c) berlincreators.de
+
 // Cube 10x10x10mm
 cube(10);
 // Cube 10x10x10mm (zentriert)

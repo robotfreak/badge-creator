@@ -1,4 +1,5 @@
-// Übung 2: Basiskurs OpenSCAD
+// Basiskurs OpenSCAD
+// uebung2.scad
 // (c) berlincreators.de
 
 // Haus

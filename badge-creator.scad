@@ -1,7 +1,11 @@
+// Basiskurs OpenSCAD
+//  badge-creator.scad
+// (c) berlincreators.de
+
 use <qrcode.scad>
 
 /* [global] */
-basemodel="square"; // [square:Square, circle:Circle, svg:SVG File] 
+basemodel="square"; // [square:Square, circle:Circle, svg:SVG] 
 height=2.0;  // .1
 textheight=1.0;  // .1
 engrave=false;
@@ -11,12 +15,12 @@ keyhole=false;
 diameter=23.0;     // .1
 edges=50;  // [3:100]
 /* [Square options] */
-length=85.0; 
-width=55.0; 
-upper_left_edge_diameter=16; 
+length=85.0; // [10:120]
+width=55.0;  // [10:120] 
+upper_left_edge_diameter=4; 
 upper_right_edge_diameter=4; 
 lower_right_edge_diameter=4; 
-lower_left_edge_diameter=16; 
+lower_left_edge_diameter=4; 
 /* [SVG options] */
 svgfile="bone.svg";
 svgscale=1.0;  // .02
@@ -24,14 +28,16 @@ svgxofs=-60;
 svgyofs=-35;
 /* [Keyhole options] */
 keyholemode="round"; // [round:Round, slot:Slot]
-keyholexofs=0;
-keyholeyofs=0;
+keyholexofs=0;    // .1
+keyholeyofs=0;    // .1
+keyholeheight=2;  // .1
 /* [1. text line] */
 txt1="<Organization>";
 fnt1="Ubuntu";
 fnt1size=8;
 x1ofs=0.0;   // .1
 y1ofs=15.0;  // .1
+txt1rotate=0;
 
 /* [2. text line] */
 txt2="<Name>";
@@ -39,6 +45,7 @@ fnt2="Ubuntu";
 fnt2size=8;
 x2ofs=-17.0;  // .1
 y2ofs=-3.0; // .1
+txt2rotate=0;
 
 /* [3. text line] */
 txt3="<Info>";
@@ -46,6 +53,7 @@ fnt3="Ubuntu";
 fnt3size=8;
 x3ofs=-10.0;  // .1
 y3ofs=-19.0; // .1
+txt3rotate=0;
 
 /* [4. text line] */
 txt4="";
@@ -53,6 +61,7 @@ fnt4="font awesome 6 brands";
 fnt4size=8;
 x4ofs=-32.0;  // .1
 y4ofs=-19.0; // .1
+txt4rotate=0;
 
 /* [Logo] */
 logofile="svg"; // [svg:SVG File, qrcode:QR Code File]
@@ -98,16 +107,16 @@ module svgBadge(ht=2.4) {
 
 module labeling() {
     if (txt1 != "") {
-        translate([x1ofs,y1ofs,0]) color("black") linear_extrude(textheight) text(txt1, font=fnt1, size=fnt1size, halign = "center", valign="center");
+        translate([x1ofs,y1ofs,0]) rotate([0,0,txt1rotate]) color("black") linear_extrude(textheight) text(txt1, font=fnt1, size=fnt1size, halign = "center", valign="center");
     }
     if (txt2 != "") {
-        translate([x2ofs,y2ofs,0]) color("black") linear_extrude(textheight) text(txt2, font=fnt2, size=fnt2size, halign = "center", valign="center");
+        translate([x2ofs,y2ofs,0]) rotate([0,0,txt2rotate]) color("black") linear_extrude(textheight) text(txt2, font=fnt2, size=fnt2size, halign = "center", valign="center");
     }
     if (txt3!="") {
-        translate([x3ofs,y3ofs,0]) color("black") linear_extrude(textheight) text(txt3, font=fnt3, size=fnt3size, halign = "center", valign="center");
+        translate([x3ofs,y3ofs,0]) rotate([0,0,txt3rotate]) color("black") linear_extrude(textheight) text(txt3, font=fnt3, size=fnt3size, halign = "center", valign="center");
     }
     if (txt4 != "") {
-        translate([x4ofs,y4ofs,0]) color("black") linear_extrude(textheight) text(txt4, font=fnt4, size=fnt4size, halign = "center", valign="center");
+        translate([x4ofs,y4ofs,0]) rotate([0,0,txt4rotate]) color("black") linear_extrude(textheight) text(txt4, font=fnt4, size=fnt4size, halign = "center", valign="center");
     }
     if (logo != "") {
         if (logofile == "svg") {
@@ -119,7 +128,7 @@ module labeling() {
     }
 }
 
-
+module badge() {
 if (basemodel == "square") {
     if (engrave == true) {
         difference() {
@@ -162,27 +171,45 @@ else if (basemodel == "svg") {
         translate([0,0,height]) labeling();
     }
 }
-if (keyhole == true) {
-    translate([keyholexofs, keyholeyofs,0]) {
-        if (keyholemode == "round") {
-            difference() {
-                cylinder(h=height+textheight, d=6);
-                cylinder(h=height+textheight, d=3);
+}
+
+module keyhole_hole() {
+    if (keyhole == true) {
+        translate([keyholexofs, keyholeyofs,0]) {
+            if (keyholemode == "round") {
+                cylinder(h=keyholeheight, d=3.5);
             }
-        }
-        else if (keyholemode == "slot") {
-            difference() {
+            else if (keyholemode == "slot") { 
                 hull() {
-                    translate([6,0,0]) cylinder(h=height+textheight, d=6);
-                    translate([-6,0,0]) cylinder(h=height+textheight, d=6);
+                    translate([7,0,0]) cylinder(h=keyholeheight, d=3.5);
+                    translate([-7,0,0]) cylinder(h=keyholeheight, d=3.5);
                 }
-                hull() {
-                    translate([5,0,0]) cylinder(h=height+textheight, d=2);
-                    translate([-5,0,0]) cylinder(h=height+textheight, d=2);
-                }
-                cylinder(h=height+textheight, d=3);
+                translate([0,1,0]) cylinder(h=keyholeheight, d=3.5);
             }
         }
     }
-        
 }
+
+module keyhole_body() {
+    if (keyhole == true) {
+        translate([keyholexofs, keyholeyofs,0]) {
+            if (keyholemode == "round") {
+                cylinder(h=keyholeheight, d=6);
+            }
+            else if (keyholemode == "slot") {
+                hull() {
+                    translate([8,0,0]) cylinder(h=keyholeheight, d=6);
+                    translate([-8,0,0]) cylinder(h=keyholeheight, d=6);
+                }
+            }
+        }
+    }
+}
+
+difference() { 
+    union() {
+        badge();
+        keyhole_body();
+    }  
+    keyhole_hole();
+}   

@@ -1,5 +1,8 @@
-// Zusammenfasssen
+// Basiskurs OpenSCAD
+//  badge-creator.scad
+// (c) berlincreators.de
 
+// Zusammenfasssen
 module Zusammenfassen() {
     union() {
         cube(30, center=true);
@@ -7,6 +10,7 @@ module Zusammenfassen() {
     }
 }
 
+// Differenz
 module Differenz() {
     difference() {
         cube(30, center=true);
@@ -14,6 +18,7 @@ module Differenz() {
     }
 }
 
+// Schnittmenge
 module Schnittmenge() {
     intersection() {
         cube(30, center=true);

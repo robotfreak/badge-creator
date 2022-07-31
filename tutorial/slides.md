@@ -7,7 +7,7 @@ backgroundColor: #fff
 backgroundImage: url('https://marp.app/assets/hero-background.svg')
 ---
 
-![bg left:40% 80%](logo.svg)
+![bg left:40% 80%](berlincreators.svg)
 
 # **OpenSCAD**
 
@@ -177,7 +177,15 @@ cylinder(h=30, r1=10, r2=0, center=0); cylinder(h=30, r1=10, r2=5, center=0);
 # Kugel
 
 Der Befehl sphere zeichnet eine Kugel. Als Parameter gibt man den Radius r oder den Durchmesser d an. 
-Die Anzahl der Ecken kann über den Parameter $fn bestimmt werden. Je höher desto feiner aufgelöst wird die dargestellte Kugel (8,30,100)
+Die Anzahl der Ecken kann über den Parameter $fn bestimmt werden. Je höher desto feiner aufgelöst wird die dargestellte Kugel 
+
+---
+
+# Beispiele Kugel 
+
+Die folgenden Beispiele zeichen Kugeln mit 8, 30 und 100 Ecken.
+
+sphere(10, $fn=8); sphere(10); sphere(10, $fn=100); 
 
 ![width:300px](sphere-8eckig.png) ![width:300px](sphere.png) ![width:300px](sphere-100eckig.png)
 

@@ -1,3 +1,7 @@
+// Basiskurs OpenSCAD
+// bone.scad
+// (c) berlincreators.de
+
 translate([-40,16,0]) circle(20);
 translate([-40,-16,0]) circle(20);
 translate([40,16,0]) circle(20);

@@ -1,3 +1,7 @@
+// Basiskurs OpenSCAD
+// spehre.scad
+// (c) berlincreators.de
+
 // Kugel r=10mm
 !sphere(10, $fn=20);
 // Kugel r=10mm, 8 Ecken
