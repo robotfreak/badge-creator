@@ -322,8 +322,9 @@ OpenSCAD kann auch zum erzeugen von 2D Objekte verwendet werden, so gibt es u.a:
 
 Syntax: text(text="<text>", size=10, font="Ubuntu")
 
-Texte sind ein wichtiger Baustein, des es als 3D Befehl nicht gibt. 
+Texte sind ein wichtiger Baustein, für die es in der 3D Welt keinen entsprechenden Befehl gibt. 
 
+![width:300px](text.png) 
 
 ---
 
