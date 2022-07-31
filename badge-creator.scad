@@ -67,8 +67,8 @@ txt4rotate=0;
 logofile="svg"; // [svg:SVG File, qrcode:QR Code File]
 logo="oshw.svg";
 xlogoofs=5.0;  // .1
-ylogoofs=-20.0; // .1
-logoscale=0.7;  // .02
+ylogoofs=-55.0; // .1
+logoscale=3;  // .02
 
 /* [Hidden] */
 $fn=30;

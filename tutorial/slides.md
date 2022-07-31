@@ -71,6 +71,17 @@ Zudem gibt es eine Iconleiste unter dem Vorschau Fenster, um die Ansicht zu änd
 
 ---
 
+# Tastaturbefehle
+
+Die wichtigsten Tastaturbefehle in OpenSCAD sind:
+
+* F4 Modell neu laden und Vorschau aktualisieren
+* F5 Vorschau aktualisieren
+* F6 Modell rendern
+* F7 Modell als STL speichern
+
+---
+
 # Der Customizer
 
 Über den Customizer lassen sich Parameter des Modells ändern, sofern der Schöpfer des Modells dies vorgesehen hat. 
@@ -100,7 +111,8 @@ Jede der 4 Textzeile kann:
 * der anzuzeigende Text,
 * der verwendete Font,
 * die Fontgröße,
-* die Position auf dem Badge,
+* die Position des Textes auf dem Badge,
+* Den Text rotieren lassen
 
 Als Sonderfall können auch Icons dargestellt werden, z.B aus dem FontAwesome Brand oder Free Font. 
 
@@ -110,7 +122,7 @@ Als Sonderfall können auch Icons dargestellt werden, z.B aus dem FontAwesome Br
 
 Das Logo kann ebenso frei positioniert und in der Größe skaliert werden. Das SVG File muss im selben Ordner liegen wie das Skript.
 
-ALs Logo kann auch ein QR Code eingebunden werden. Dieser kann online unter https://ridercz.github.io/OpenSCAD-QR/ erzeugt werden. Die Daten unter qr_data werden dann per copy & paste an die entsprechende Stelle in der Datei qrcode.scad eingefügt. 
+Als Logo kann auch ein QR Code eingebunden werden. Dieser kann online unter https://ridercz.github.io/OpenSCAD-QR/ erzeugt werden. Die Daten unter qr_data werden dann per copy & paste an die entsprechende Stelle in der Datei qrcode.scad eingefügt. 
 
 ---
 
@@ -284,3 +296,63 @@ Syntax: intersection() { object1(); object2(); }
 Der Befehl intersection bildet die Schnittmenge von Objekten.
 
 ![width:300px](intersection.png) 
+
+---
+
+# 3. Übung
+
+![bg left:40% 80%](pokal.png)
+
+Mit den Mengenoperatoren lassen sich nun auch Hohlkörper wie eine Gehäusebox o.ä erstellen, ebenso wie Bohrungen in Objekten erzeugen. Als Übung soll ein Pokal erstellt werden.
+
+---
+ 
+# 2D Objekte 
+
+OpenSCAD kann auch zum erzeugen von 2D Objekte verwendet werden, so gibt es u.a:
+
+* Kreis - circle 
+* Quadrat - square
+* Polygon - polygon
+* Text - text
+
+---
+
+# Text 
+
+Syntax: text(text="<text>", size=10, font="Ubuntu")
+
+Texte sind ein wichtiger Baustein, des es als 3D Befehl nicht gibt. 
+
+
+---
+
+# 2D Objekte in 3D wandeln
+
+Um 2D Objekte in der 3D Welt nutzen zu können müssen diese in die Höhe "gezogen" werden, dazu gibt es die beiden Befehle:
+
+* linear_extrude()
+* rotate_extrude()
+
+---
+
+# linear_extrude
+
+Syntax: linear_extrude(height) object(); 
+
+Um Text in 3D zu wandeln reicht es dem text Befehl ein linear_extrude() voranzutellen. Die Höhe ist der einzige Parameter, den linear_extrude erwartet. 
+
+linear_extrude(1) text("Hello", size=10, font="Ubuntu");
+
+---
+
+# rotate_extrude
+
+Syntax: rotate_extrude(height) object(); 
+
+Mit rotate_extrude kann ein 2D Objekt kreisförmig extrudiert werden. Folgendes Beispeil erstellt einen Donut.
+rotate_extrude(angle=360) translate([20, 0])circle(d=5, $fn=30);
+
+![width:300px](donut.png) 
+
+---
