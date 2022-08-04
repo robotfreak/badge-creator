@@ -306,7 +306,18 @@ Der Befehl intersection bildet die Schnittmenge von Objekten.
 Mit den Mengenoperatoren lassen sich nun auch Hohlkörper wie eine Gehäusebox o.ä erstellen, ebenso wie Bohrungen in Objekten erzeugen. Als Übung soll ein Pokal erstellt werden.
 
 ---
- 
+
+# Module
+
+Syntax: module name( parameter ) { action }
+
+OpenSCAD lässt sich mit eigenen Befehlen erweitern. Dazu werden Module benutzt. Module können Parameter besitzen 
+
+Aufrufen lässt sich ein Modul mit: 
+name( parameter values );
+
+---
+
 # 2D Objekte 
 
 OpenSCAD kann auch zum erzeugen von 2D Objekte verwendet werden, so gibt es u.a:
@@ -357,3 +368,49 @@ rotate_extrude(angle=360) translate([20, 0])circle(d=5, $fn=30);
 ![width:300px](donut.png) 
 
 ---
+
+# Include 
+
+Syntax: include <....scad>
+
+Mit dem Befehl include lassen sich Bibliotheken in eigene Skripte einbinden. Bibliotheken sind nichts anderes als SCAD Skripte. Es gibt diverse Bibliotheken zu allen möglichen Schwerpunkten wie z.B.:
+Gewinde, Gehäuse, Round Anything, etc.
+
+Nähere Infos finden sich unter https://openscad.org/libraries.html
+
+---
+
+# Use
+
+Syntax: use <....scad>
+
+Mit dem Befehl use lassen sich ähnlich wie mit include Bibliotheken in eigene Skripte einbinden. Der einzige Unterschied zu include ist:
+Bei use werden nur Module und Funktionen aus der Bibliothek übernommen. Include übernimmt alles.
+
+---
+
+# Hüllkurven 
+
+Syntax: hull() { object1; object2; ... }
+
+Mit dem Befehl hull lassen sich Objekte mit einer Hüllkurve verbinden. 
+
+![width:300px](hull.png) 
+
+---
+
+# Minkowski
+
+Syntax: minkowski() { object1; object2 }; 
+
+Mit dem Befehl minkowski lässt sich die Minkowski Summe von 2 Objekten bilden. 
+
+![width:300px](minkowski.png) 
+
+---
+
+# Weitere Tutorials
+
+* https://openscad.org/documentation-articles.html#makerbot-blog
+* http://www.knopper.net/bw/gdi/OpenScad-Tutorial.pdf
+* https://www.youtube.com/watch?v=10uErKRSe8E&list=PLZ89Fw0KZGPzrNtcVRDutvuOsVAHZNa20
