@@ -32,6 +32,7 @@ Die Objekte bestehen aus einfachen Grundkörpern die zu komplexen 3D Modellen ko
 * Basis Tutorial https://github.com/robotfreak/badge-creator
 * FontAwesome brand und free Font https://github.com/FortAwesome/Font-Awesome
 * Baumans Font https://www.1001fonts.com/baumans-font.html
+* American Stencil Font https://www.1001fonts.com/american-stencil-font.html
 
 ---
 

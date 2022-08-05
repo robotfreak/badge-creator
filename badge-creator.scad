@@ -10,7 +10,7 @@ height=2.0;  // .1
 textheight=1.0;  // .1
 engrave=false;
 magnets=false;
-keyhole=false;
+keychainhole=false;
 /* [Round options] */
 diameter=23.0;     // .1
 edges=50;  // [3:100]
@@ -26,11 +26,11 @@ svgfile="bone.svg";
 svgscale=1.0;  // .02
 svgxofs=-60;
 svgyofs=-35;
-/* [Keyhole options] */
-keyholemode="round"; // [round:Round, slot:Slot]
-keyholexofs=0;    // .1
-keyholeyofs=0;    // .1
-keyholeheight=2;  // .1
+/* [Keychain hole options] */
+keychainholemode="round"; // [round:Round, slot:Slot]
+keychainholexofs=0;    // .1
+keychainholeyofs=0;    // .1
+keychainholeheight=2;  // .1
 /* [1. text line] */
 txt1="<Organization>";
 fnt1="Ubuntu";
@@ -173,33 +173,33 @@ else if (basemodel == "svg") {
 }
 }
 
-module keyhole_hole() {
-    if (keyhole == true) {
-        translate([keyholexofs, keyholeyofs,0]) {
-            if (keyholemode == "round") {
-                cylinder(h=keyholeheight, d=3.5);
+module keychainhole_hole() {
+    if (keychainhole == true) {
+        translate([keychainholexofs, keychainholeyofs,0]) {
+            if (keychainholemode == "round") {
+                cylinder(h=keychainholeheight, d=3.5);
             }
-            else if (keyholemode == "slot") { 
+            else if (keychainholemode == "slot") { 
                 hull() {
-                    translate([7,0,0]) cylinder(h=keyholeheight, d=3.5);
-                    translate([-7,0,0]) cylinder(h=keyholeheight, d=3.5);
+                    translate([7,0,0]) cylinder(h=keychainholeheight, d=3.5);
+                    translate([-7,0,0]) cylinder(h=keychainholeheight, d=3.5);
                 }
-                translate([0,1,0]) cylinder(h=keyholeheight, d=3.5);
+                translate([0,1,0]) cylinder(h=keychainholeheight, d=3.5);
             }
         }
     }
 }
 
-module keyhole_body() {
-    if (keyhole == true) {
-        translate([keyholexofs, keyholeyofs,0]) {
-            if (keyholemode == "round") {
-                cylinder(h=keyholeheight, d=6);
+module keychainhole_body() {
+    if (keychainhole == true) {
+        translate([keychainholexofs, keychainholeyofs,0]) {
+            if (keychainholemode == "round") {
+                cylinder(h=keychainholeheight, d=6);
             }
-            else if (keyholemode == "slot") {
+            else if (keychainholemode == "slot") {
                 hull() {
-                    translate([8,0,0]) cylinder(h=keyholeheight, d=6);
-                    translate([-8,0,0]) cylinder(h=keyholeheight, d=6);
+                    translate([8,0,0]) cylinder(h=keychainholeheight, d=6);
+                    translate([-8,0,0]) cylinder(h=keychainholeheight, d=6);
                 }
             }
         }
@@ -209,7 +209,7 @@ module keyhole_body() {
 difference() { 
     union() {
         badge();
-        keyhole_body();
+        keychainhole_body();
     }  
-    keyhole_hole();
+    keychainhole_hole();
 }   
