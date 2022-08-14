@@ -50,7 +50,7 @@ Die Fonts werden je nach OS entsprechend installiert und stehen dann unter OpenS
 
 Anfangen wollen wir mit dem Customizer. Da sich OpenSCAD Modelle sehr gut parametrisieren lassen ist dies ein einfacher Einstieg, der ohne Programmierkenntnisse auskommt.
 
-Dazu öffnen wir OpenSCAD  und laden das Skript badge-creator.scad aus dem Basis Tutorial Ordner.
+Dazu öffnen wir OpenSCAD  und laden das Skript **badge-creator.scad** aus dem Basis Tutorial Ordner.
 
 Den Editor links im Bild schliessen wir zunächst (klick auf das x). Statt dessen benötigen wir den Customizer (Im Menü 'Windows' den Haken vor 'Hide customizer' entfernen).
 
@@ -87,7 +87,7 @@ Die wichtigsten Tastaturbefehle in OpenSCAD sind:
 
 Über den Customizer lassen sich Parameter des Modells ändern, sofern der Schöpfer des Modells dies vorgesehen hat. 
 
-In unserem Beispiel, dem badge-creator können die globalen Parameter u.a Form, Breite und Höhe des Badge, sowie der Text, Position, Font und Fontgröße für maximal 4 Textzeilen geändert werden. Zudem kann ein beliebiges SVG Logo oder ein QR Code platziert werden.
+In unserem Beispiel, dem badge-creator können die globalen Parameter u.a Form, Breite und Höhe des Badge. Der Text, Position, Font und Fontgröße kann für maximal 4 Textzeilen geändert werden. Zudem kann ein beliebiges SVG Logo oder ein QR Code platziert werden.
 
 Damit lassen sich Badges für viele Anwendungszwecke individuell anpassen, ohne auch nur einzige Zeile zu programmieren.   
 
@@ -99,7 +99,7 @@ Zu den globalen Einstellungen zählen:
 * die Form des Badge (rund, eckig oder ein SVG Bild),
 * Die Abmessungen, 
 * die Rundung der Ecken (bei der eckigen Form),
-* Um welche Höhe der Text erhoben ist,
+* Die Höhe des Textes,
 * Ob der Text in die Höhe ragt oder nach unten (Gravur), 
 * ein Loch für Schlüsselanhänger 
 * oder Vertiefungen für Magnete (zum Einkleben)
@@ -108,14 +108,16 @@ Zu den globalen Einstellungen zählen:
 
 # Text Einstellungen
 
-Jede der 4 Textzeile kann:
+Für jede der 4 Textzeile kann:
 * der anzuzeigende Text,
 * der verwendete Font,
 * die Fontgröße,
 * die Position des Textes auf dem Badge,
-* Den Text rotieren lassen
+* die Text Rotation
 
-Als Sonderfall können auch Icons dargestellt werden, z.B aus dem FontAwesome Brand oder Free Font. 
+eingestellt werden.
+
+Als Text können auch Icons dargestellt werden.
 
 ---
 
@@ -123,7 +125,7 @@ Als Sonderfall können auch Icons dargestellt werden, z.B aus dem FontAwesome Br
 
 Das Logo kann ebenso frei positioniert und in der Größe skaliert werden. Das SVG File muss im selben Ordner liegen wie das Skript.
 
-Als Logo kann auch ein QR Code eingebunden werden. Dieser kann online unter https://ridercz.github.io/OpenSCAD-QR/ erzeugt werden. Die Daten unter qr_data werden dann per copy & paste an die entsprechende Stelle in der Datei qrcode.scad eingefügt. 
+Als Logo kann auch ein QR Code eingebunden werden. Dieser kann online unter https://ridercz.github.io/OpenSCAD-QR/ erzeugt werden. Die Daten unter qr_data werden dann per copy & paste an die entsprechende Stelle in der Datei **qrcode.scad** eingefügt. 
 
 ---
 
@@ -137,17 +139,22 @@ Als erste Übung könnt ihr ein persönliches Badge erstellen, z.B. ein Namens-S
 
 # OpenSCAD Programmierung
 
-Kommen wir zum eigentlichen Thema die Programmierung von SCAD. Die Befehlsübersicht findet man unter dem Menüpunkt 'Help | Cheat Sheet'. Dahinter verbirgt sich ein Link auf: https://openscad.org/cheatsheet/
+Kommen wir zum eigentlichen Thema die Programmierung von SCAD. Die Befehlsübersicht von OpenSCAD findet man unter dem Menüpunkt 'Help | Cheat Sheet'. 
+
+Dahinter verbirgt sich ein Link auf: 
+https://openscad.org/cheatsheet/
 
 ---
 
 # 3D Grundkörper
 
-Anfangen wollen wir mit den 3D Grundkörper. Davon gibt es nur ein paar wenige:
+Anfangen wollen wir mit den 3D Grundkörpern:
 * Würfel (cube)
 * Zylinder (cylinder)
 * Kugel (sphere)
-* Polyeder (polyhedron)
+* Polyeder (polyhedron)*
+
+*Der Polyeder ist eher etwas für fortgeschrittene User.
 
 ---
 
@@ -155,11 +162,11 @@ Anfangen wollen wir mit den 3D Grundkörper. Davon gibt es nur ein paar wenige:
 
 Syntax: cube(l); cube(l, center=true); cube([x,y,z]);
 
-Der Befehl cube zeichnet einen Würfel mit der Kantenlänge als Parameter. Einen Quader zeichnet man durch Angabe der x,y,z Kantenlänge in eckigen Klammern. Der optionale Parameter center=true zentriert den Würfel 
+Der Befehl **cube** zeichnet einen Würfel mit der Kantenlänge als Parameter. Einen Quader zeichnet man durch Angabe der x,y,z Kantenlänge in eckigen Klammern. Der optionale Parameter center=true zentriert den Würfel 
 
 ---
 
-# Beispiele cube
+# Beispiele Würfel
 
 Die folgenden Beispiele zeichnen einen Würfel mit 10mm Kantenläge, einen zentrierten Würfel mit 10mm Kantenläge und einen Quader mit 30x20x10mm (x,y,z) Kantenlänge.
 
@@ -173,11 +180,11 @@ cube(10); cube(10, center=true); cube([30,20,10]);
 
 Syntax: cylinder(r,h)
 
-Der Befehl cylinder zeichnet einen Zylinder. Als Parameter kann der Radius r oder der Durchmesser und die Höhe h angegeben werden. Für einen Kegel gibt man r1 für den unteren Radius und r2 für den oberen Radius, bzw  d1 und d2 für den Durchmesser an.
+Der Befehl **cylinder** zeichnet einen Zylinder. Als Parameter kann der Radius r oder der Durchmesser und die Höhe h angegeben werden. Für einen Kegel gibt man r1 für den unteren Radius und r2 für den oberen Radius, bzw  d1 und d2 für den Durchmesser an.
 
 ---
 
-# Beispiele cylinder
+# Beispiele Zylinder
 
 Die folgenden Beispiele zeichen einen Zylinder, einen spitzen und einen stumpfen Kegel. 
 cylinder(h=30, r=10); 
@@ -189,7 +196,7 @@ cylinder(h=30, r1=10, r2=0, center=0); cylinder(h=30, r1=10, r2=5, center=0);
 
 # Kugel
 
-Der Befehl sphere zeichnet eine Kugel. Als Parameter gibt man den Radius r oder den Durchmesser d an. 
+Der Befehl **sphere** zeichnet eine Kugel. Als Parameter gibt man den Radius r oder den Durchmesser d an. 
 Die Anzahl der Ecken kann über den Parameter $fn bestimmt werden. Je höher desto feiner aufgelöst wird die dargestellte Kugel 
 
 ---
@@ -218,7 +225,7 @@ Die Parameter für x, y und z werden jeweils in eckigen Klammern mit Komma getre
 
 Syntax: translate([x,y,z]) object();
  
-Translate bewegt ein Objekt in x-, y- bzw. z-Richtung.
+Der Befehl **translate** bewegt ein Objekt in x-, y- bzw. z-Richtung.
 
 ---
 
@@ -236,7 +243,7 @@ translate([10,0,5]) cube(10);
 
 Syntax rotate([x,y,z]) object();
 
-Rotate rotiert ein Objekt um die  x-, y- bzw. z-Achse.
+Der Befehl **rotate** rotiert ein Objekt um die  x-, y- bzw. z-Achse.
 
 ---
 
@@ -274,7 +281,7 @@ Zu den Mengenoperationen (boolsche Operationen) in OpenSCAD zählen:
 
 Syntax: union() { object1(); object2(); }
 
-Der Befehl union fasst mehrere Objekte zu einem Objekt zusammen. Auf das zusammengefasste Objekt können dann andere OPerationen wie verschieben (translate), rotieren (rotate) etc. angewandt werden.
+Der Befehl **union** fasst mehrere Objekte zu einem Objekt zusammen. Auf das zusammengefasste Objekt können dann andere OPerationen wie verschieben (translate), rotieren (rotate) etc. angewandt werden.
 
 ![width:300px](union.png)
 
@@ -284,7 +291,7 @@ Der Befehl union fasst mehrere Objekte zu einem Objekt zusammen. Auf das zusamme
 
 Syntax: difference() { object1(); object2(); }
 
-Der Befehl difference zieht vom ersten angegebenen Objekt die folgenden Objekte ab.
+Der Befehl **difference** zieht vom ersten angegebenen Objekt die folgenden Objekte ab.
 
 ![width:300px](difference.png) ![width:300px](difference-hollow.png)
 
@@ -294,7 +301,7 @@ Der Befehl difference zieht vom ersten angegebenen Objekt die folgenden Objekte 
 
 Syntax: intersection() { object1(); object2(); }
 
-Der Befehl intersection bildet die Schnittmenge von Objekten.
+Der Befehl **intersection** bildet die Schnittmenge von Objekten.
 
 ![width:300px](intersection.png) 
 
@@ -312,7 +319,7 @@ Mit den Mengenoperatoren lassen sich nun auch Hohlkörper wie eine Gehäusebox o
 
 Syntax: module name( parameter ) { action }
 
-OpenSCAD lässt sich mit eigenen Befehlen erweitern. Dazu werden Module benutzt. Module können Parameter besitzen 
+OpenSCAD lässt sich mit eigenen Befehlen erweitern. Dazu wird der Befehl **module** benutzt. Module können Parameter besitzen 
 
 Aufrufen lässt sich ein Modul mit: 
 name( parameter values );
@@ -353,7 +360,7 @@ Um 2D Objekte in der 3D Welt nutzen zu können müssen diese in die Höhe "gezog
 
 Syntax: linear_extrude(height) object(); 
 
-Um Text in 3D zu wandeln reicht es dem text Befehl ein linear_extrude() voranzutellen. Die Höhe ist der einzige Parameter, den linear_extrude erwartet. 
+Um Text in 3D zu wandeln reicht es dem text Befehl ein **linear_extrude** voranzutellen. Die Höhe ist der einzige Parameter, den linear_extrude erwartet. 
 
 linear_extrude(1) text("Hello", size=10, font="Ubuntu");
 
@@ -363,7 +370,7 @@ linear_extrude(1) text("Hello", size=10, font="Ubuntu");
 
 Syntax: rotate_extrude(height) object(); 
 
-Mit rotate_extrude kann ein 2D Objekt kreisförmig extrudiert werden. Folgendes Beispeil erstellt einen Donut.
+Mit **rotate_extrude** kann ein 2D Objekt kreisförmig extrudiert werden. Folgendes Beispeil erstellt einen Donut.
 rotate_extrude(angle=360) translate([20, 0])circle(d=5, $fn=30);
 
 ![width:300px](donut.png) 
@@ -374,7 +381,7 @@ rotate_extrude(angle=360) translate([20, 0])circle(d=5, $fn=30);
 
 Syntax: include <....scad>
 
-Mit dem Befehl include lassen sich Bibliotheken in eigene Skripte einbinden. Bibliotheken sind nichts anderes als SCAD Skripte. Es gibt diverse Bibliotheken zu allen möglichen Schwerpunkten wie z.B.:
+Mit dem Befehl **include** lassen sich Bibliotheken in eigene Skripte einbinden. Bibliotheken sind nichts anderes als SCAD Skripte. Es gibt diverse Bibliotheken zu allen möglichen Schwerpunkten wie z.B.:
 Gewinde, Gehäuse, Round Anything, etc.
 
 Nähere Infos finden sich unter https://openscad.org/libraries.html
@@ -385,7 +392,7 @@ Nähere Infos finden sich unter https://openscad.org/libraries.html
 
 Syntax: use <....scad>
 
-Mit dem Befehl use lassen sich ähnlich wie mit include Bibliotheken in eigene Skripte einbinden. Der einzige Unterschied zu include ist:
+Mit dem Befehl **use** lassen sich ähnlich wie mit include Bibliotheken in eigene Skripte einbinden. Der einzige Unterschied zu include ist:
 Bei use werden nur Module und Funktionen aus der Bibliothek übernommen. Include übernimmt alles.
 
 ---
@@ -394,7 +401,7 @@ Bei use werden nur Module und Funktionen aus der Bibliothek übernommen. Include
 
 Syntax: hull() { object1; object2; ... }
 
-Mit dem Befehl hull lassen sich Objekte mit einer Hüllkurve verbinden. 
+Mit dem Befehl **hull** lassen sich Objekte mit einer Hüllkurve verbinden. 
 
 ![width:300px](hull.png) 
 
@@ -404,7 +411,7 @@ Mit dem Befehl hull lassen sich Objekte mit einer Hüllkurve verbinden.
 
 Syntax: minkowski() { object1; object2 }; 
 
-Mit dem Befehl minkowski lässt sich die Minkowski Summe von 2 Objekten bilden. 
+Mit dem Befehl **minkowski** lässt sich die Minkowski Summe von 2 Objekten bilden. 
 
 ![width:300px](minkowski.png) 
 
