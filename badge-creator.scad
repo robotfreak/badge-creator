@@ -15,8 +15,8 @@ keychainhole=false;
 diameter=23.0; // [10:.1:120]
 edges=50;  // [3:1:100]
 /* [Square options] */
-length=85.0; // [10:1:120]
-width=55.0;  // [10:1:120] 
+length=85.0; // [10:1:150]
+width=55.0;  // [10:1:150] 
 upper_left_edge_diameter=4; 
 upper_right_edge_diameter=4; 
 lower_right_edge_diameter=4; 
@@ -25,7 +25,7 @@ lower_left_edge_diameter=4;
 svgfile="bone.svg";
 svg_scale=1.0;  // .02
 svg_offset=[-60, -35, 0];  // [-120:.1:100]
-svg_rotate=[0,0,0]; 
+svg_rotate=0; // [-180:1:180]
 /* [Keychain hole options] */
 keychainhole_mode="round"; // [round:Round, slot:Slot]
 keychainhole_offset=[0,0,0];  // [-100:.1:100]
@@ -35,34 +35,41 @@ txt1="<Organization>";
 txt1_font="Ubuntu";
 txt1_fontsize=8;
 txt1_offset=[0.0,15.0,0];  // [-120:.1:120]
-txt1_rotate=[0,0,0]; // [-180:1:180]
+txt1_rotate=0; // [-180:1:180]
 
 /* [2. text line] */
 txt2="<Name>";
 txt2_font="Ubuntu";
 txt2_fontsize=8;
 txt2_offset=[-17.0,3.0,0];   // [-120:.1:120]
-txt2_rotate=[0,0,0]; // [-180:1:180]
+txt2_rotate=0; // [-180:1:180]
 
 /* [3. text line] */
 txt3="<Info>";
 txt3_font="Ubuntu";
 txt3_fontsize=8;
 txt3_offset=[-10.0,-19.0,0];   // [-120:.1:120]
-txt3_rotate=[0,0,0]; // [-180:1:180]
+txt3_rotate=0; // [-180:1:180]
 
 /* [4. text line] */
 txt4="";
 txt4_font="font awesome 6 brands";
 txt4_fontsize=8;
 txt4_offset=[-32.0,-19.0,0];  // [-120:.1:120]
-txt4_rotate=[0,0,0]; // [-180:1:180]
+txt4_rotate=0; // [-180:1:180]
+
+/* [5. text line] */
+txt5="";
+txt5_font="Ubuntu";
+txt5_fontsize=8;
+txt5_offset=[-10.0,-19.0,0];   // [-120:.1:120]
+txt5_rotate=0; // [-180:1:180]
 
 /* [Logo] */
 logo_mode="svg"; // [svg:SVG File, qrcode:QR Code File]
 logo_file="oshw.svg";
 logo_offset=[5.0,-55.0,0];   // [-100:.1:100]
-logo_rotate=[0,0,0]; // [-180:1:180]
+logo_rotate=0; // [-180:1:180]
 logo_scale=3.0;  // .02
 
 /* [Hidden] */
@@ -97,28 +104,40 @@ module squareBadge(l=85.0, w=55.0, ht=2.0) {
 }
 
 module svgBadge(ht=2.4) {
-    translate(svg_offset) rotate(svg_rotate) linear_extrude(ht) scale(svg_scale) import(file=svgfile, center=true); 
+ difference() {
+   union() {
+    translate(svg_offset) rotate([0,0,svg_rotate]) linear_extrude(ht) scale(svg_scale) import(file=svgfile, center=true); 
+   }
+    if (magnets == true) {
+        translate([0,0,0]) cylinder(d=8.3,h=ht/2);
+        translate([-15,0,0]) cylinder(d=8.3,h=ht/2);
+        translate([15,0,0]) cylinder(d=8.3,h=ht/2);
+    }
+  }
 }
 
 module labeling() {
     if (txt1 != "") {
-        translate(txt1_offset) rotate(txt1_rotate) color("black") linear_extrude(textheight) text(txt1, font=txt1_font, size=txt1_fontsize, halign = "center", valign="center");
+        translate(txt1_offset) rotate([0,0,txt1_rotate]) color("black") linear_extrude(textheight) text(txt1, font=txt1_font, size=txt1_fontsize, halign = "center", valign="center");
     }
     if (txt2 != "") {
-        translate(txt2_offset) rotate(txt2_rotate) color("black") linear_extrude(textheight) text(txt2, font=txt2_font, size=txt2_fontsize, halign = "center", valign="center");
+        translate(txt2_offset) rotate([0,0,txt2_rotate]) color("black") linear_extrude(textheight) text(txt2, font=txt2_font, size=txt2_fontsize, halign = "center", valign="center");
     }
     if (txt3!="") {
-        translate(txt3_offset) rotate(txt3_rotate) color("black") linear_extrude(textheight) text(txt3, font=txt3_font, size=txt3_fontsize, halign = "center", valign="center");
+        translate(txt3_offset) rotate([0,0,txt3_rotate]) color("black") linear_extrude(textheight) text(txt3, font=txt3_font, size=txt3_fontsize, halign = "center", valign="center");
     }
     if (txt4 != "") {
-        translate(txt4_offset) rotate(txt4_rotate) color("black") linear_extrude(textheight) text(txt4, font=txt4_font, size=txt4_fontsize, halign = "center", valign="center");
+        translate(txt4_offset) rotate([0,0,txt4_rotate]) color("black") linear_extrude(textheight) text(txt4, font=txt4_font, size=txt4_fontsize, halign = "center", valign="center");
+    }
+    if (txt5 != "") {
+        translate(txt5_offset) rotate([0,0,txt5_rotate]) color("black") linear_extrude(textheight) text(txt5, font=txt5_font, size=txt5_fontsize, halign = "center", valign="center");
     }
     if (logo_file != "") {
         if (logo_mode == "svg") {
             translate(logo_offset) color("black") linear_extrude(textheight) scale(logo_scale) import(file=logo_file); 
         }
         else if (logo_mode == "qrcode") {
-            translate(logo_offset) rotate(logo_rotate) color("black") scale(logo_scale) qr_render(); 
+            translate(logo_offset) rotate([0,0,logo_rotate]) color("black") scale(logo_scale) qr_render(); 
         }
     }
 }

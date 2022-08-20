@@ -11,7 +11,9 @@ backgroundImage: url('https://marp.app/assets/hero-background.svg')
 
 # **OpenSCAD**
 
-Ein OpenSCAD Basis Tutorial von Peter Recktenwald 
+Ein Basis Workshop mit OpenSCAD, dem etwas anderen 3D Design Tool
+
+von Peter Recktenwald 
 
 https://www.berlincreators.de
 
@@ -46,7 +48,7 @@ Die Fonts werden je nach OS entsprechend installiert und stehen dann unter OpenS
 
 ---
 
-# Los geht's mit dem Customizer 
+# Schnellstart mit dem Customizer 
 
 Anfangen wollen wir mit dem Customizer. Da sich OpenSCAD Modelle sehr gut parametrisieren lassen ist dies ein einfacher Einstieg, der ohne Programmierkenntnisse auskommt.
 
@@ -87,7 +89,7 @@ Die wichtigsten Tastaturbefehle in OpenSCAD sind:
 
 Über den Customizer lassen sich Parameter des Modells ändern, sofern der Schöpfer des Modells dies vorgesehen hat. 
 
-In unserem Beispiel, dem badge-creator können die globalen Parameter u.a Form, Breite und Höhe des Badge. Der Text, Position, Font und Fontgröße kann für maximal 4 Textzeilen geändert werden. Zudem kann ein beliebiges SVG Logo oder ein QR Code platziert werden.
+In unserem Beispiel, dem badge-creator können die globalen Parameter u.a Form, Breite und Höhe des Badge. Der Text, Position, Font und Fontgröße kann für maximal 5 Textzeilen geändert werden. Zudem kann ein beliebiges SVG Logo oder ein QR Code platziert werden.
 
 Damit lassen sich Badges für viele Anwendungszwecke individuell anpassen, ohne auch nur einzige Zeile zu programmieren.   
 
@@ -108,7 +110,7 @@ Zu den globalen Einstellungen zählen:
 
 # Text Einstellungen
 
-Für jede der 4 Textzeile kann:
+Für jede der 5 Textzeilen kann:
 * der anzuzeigende Text,
 * der verwendete Font,
 * die Fontgröße,
@@ -117,21 +119,44 @@ Für jede der 4 Textzeile kann:
 
 eingestellt werden.
 
-Als Text können auch Icons dargestellt werden.
+---
+
+# Icons als Text
+
+Auch Icons aus Icon Fonts können als Text verwendet und dargestellt werden. Der entsprechende Font muss dazu auf dem Rechner installiert werden. Sehr beliebt ist z.B. der Fontawesome Font (https://fontawesome.com/). 
+Zum Einfügen der Icons ist das Cheat Sheet hilfreich (https://fontawesome.com/v5/cheatsheet/free/solid). Einfach das gewünschte Icon auswählen und per copy & paste einfügen. 
 
 ---
 
 # Logo Einstellungen
 
-Das Logo kann ebenso frei positioniert und in der Größe skaliert werden. Das SVG File muss im selben Ordner liegen wie das Skript.
+![bg left:40% 80%](bone.svg) Als Logo können SVG Files oder Orcodes eingebunden werden. Das Logo kann ebenso frei positioniert, in der Größe skaliert und rotiert werden. 
 
-Als Logo kann auch ein QR Code eingebunden werden. Dieser kann online unter https://ridercz.github.io/OpenSCAD-QR/ erzeugt werden. Die Daten unter qr_data werden dann per copy & paste an die entsprechende Stelle in der Datei **qrcode.scad** eingefügt. 
+---
+
+# SVG als Logo
+
+Ein SVG File als Logo sollte möglichst einfach gestaltet sein. Inkscape oder OpenSCAD können zum Erzeugen von SVG Dateien verwendet werden
+Das SVG File muss im selben Ordner liegen wie das Skript.
+Vorlagen zu frei verwendbaren SVG Files findet man z.B. unter:
+
+* https://freesvg.org/
+
+---
+
+# Qrcode als Logo
+
+![bg left:40% 80%](qr-code.svg) Als Logo kann auch ein QR Code eingebunden werden. Leider klappt das nicht mit SVG Files. Der Qrcode kann online unter https://ridercz.github.io/OpenSCAD-QR/ erzeugt werden. Die Daten unter qr_data werden dann per copy & paste an die entsprechende Stelle in der Datei **qrcode.scad** eingefügt. 
 
 ---
 
 # 1. Übung
 
-Als erste Übung könnt ihr ein persönliches Badge erstellen, z.B. ein Namens-Schild, einen Schlüsselanhänger oder einen Chip für Einkaufswagen.
+Erzeuge aus dem Beispiel **uebung2.scad**
+
+Als erste Übung
+
+Erzeuge aus dem Beispiel **uebung2.scad** könnt ihr ein persönliches Badge erstellen, z.B. ein Namensschild, einen Schlüsselanhänger oder einen Chip für Einkaufswagen.
 
 ![width:300px](berlin-creator-keychain.png) ![width:300px](berlin-creator-qrcode.png) ![width:300px](bulb-coin.png)
 
@@ -261,7 +286,11 @@ Beachte hier, dass der Würfel zentriert ist (center=true). Dann liegt die Rotat
 
 # 2. Übung
 
-Mit den bisher vorgestellten Befehlen lässt sich bereits einges anfangen. Als Übung soll eine aus Grundkörpern zusammengesetze Gebäude erstellt werden, z.B. ein Haus, ein Turm, oder eine Brücke. Benutze translate und rotate um die Grundkörper im Raum anzuordnen bzw. zu drehen.
+Erzeuge aus dem Beispiel **uebung2.scad**
+
+Mit den bisher vorgestellten Befehlen lässt sich bereits einges anfangen. Als Übung
+
+Erzeuge aus dem Beispiel **uebung2.scad** soll eine aus Grundkörpern zusammengesetze Gebäude erstellt werden, z.B. ein Haus, ein Turm, oder eine Brücke. Benutze translate und rotate um die Grundkörper im Raum anzuordnen bzw. zu drehen.
 
 ![width:300px](haus.png) ![width:300px](turm.png) ![width:300px](bruecke.png)
 
@@ -309,9 +338,13 @@ Der Befehl **intersection** bildet die Schnittmenge von Objekten.
 
 # 3. Übung
 
+Erzeuge aus dem Beispiel **uebung2.scad**
+
 ![bg left:40% 80%](pokal.png)
 
-Mit den Mengenoperatoren lassen sich nun auch Hohlkörper wie eine Gehäusebox o.ä erstellen, ebenso wie Bohrungen in Objekten erzeugen. Als Übung soll ein Pokal erstellt werden.
+Mit den Mengenoperatoren lassen sich nun auch Hohlkörper wie eine Gehäusebox o.ä erstellen, ebenso wie Bohrungen in Objekten erzeugen. Als Übung
+
+Erzeuge aus dem Beispiel **uebung2.scad** soll ein Pokal erstellt werden.
 
 ---
 
@@ -411,9 +444,76 @@ Mit dem Befehl **hull** lassen sich Objekte mit einer Hüllkurve verbinden.
 
 Syntax: minkowski() { object1; object2 }; 
 
-Mit dem Befehl **minkowski** lässt sich die Minkowski Summe von 2 Objekten bilden. 
+Mit dem Befehl **minkowski** lässt sich die Minkowski Summe von 2 Objekten bilden. Hierbei wandert ein Objekt z. B. ein Cylinder an der Aussenkante eines zweiten Objekts, z.B. eines Würfel, herum. Die beiden Objekte verschmelzen dabei zu einem Objekt mit abgerundeten Ecken.
+
+---
+
+# 4. Übung
+
+Erzeuge aus dem Beispiel **uebung2.scad**
+
+Als weitere Übung
+
+Erzeuge aus dem Beispiel **uebung2.scad** entwerfe einen Quader mit abgerundeten Ecken. Verwende dazu Die Funktionen **hull()** oder **minkowski()**
 
 ![width:300px](minkowski.png) 
+
+---
+
+# Variablen
+
+Syntax: variable = wert;
+
+Variablen in OpenSCAD können global oder lokal verwendet werden. Globale Variablen stehen ausserhalb von Modulen, lokale Variablen innerhalb von Modulen.
+
+---
+
+# For Schleifen
+
+Syntax: for (i = [start:step:end]) { … }
+
+Mit **for** Schleifen werden alle Befehle wiederholt ausgeführt. Der Startwert **start** der Schleife, Die Schrittweite **step** und der Endwert **end** bestimmen die Anzahl der Wiederholungen.
+
+---
+
+# if / else Abfragen
+
+Syntax: if (test) { … } else { … }
+
+Mit **if** bzw **else** Abfragen können Bedingungen getestet werden. Trifft die Bedingung zu, werden die folgenden Befehle ausgeführt. 
+
+Trifft die Bedingung nicht zu werden die Befehle aus dem else Zweig ausgeführt. 
+
+---
+
+# 5. Übung
+
+Öffne die Datei **uebung2.scad** aus dem examples Ordner und erzeuge mit Hilfe von **for** Schleifen eine Stadt aus den vorhandenen Bauwerken.
+
+Bonus Aufgabe: Nutze **if else** Abfragen um mehr Abwechslung (Zufall) in die Stadt zu bringen
+
+---
+
+# OpenSCAD Customizer
+
+Wie kommen nun die Parameter in das Customizer Fenster, um damit ein Modell zu parametrisieren? Ganz einfach: Sie werden am Anfang des Skripts vor dem ersten Modul als globale Variablen definiert und tauchen dadurch automatisch im Customizer auf.
+
+---
+
+# Customizer Syntax
+
+Das Aussehen der Customizer Variablen kann mit Kommentaren hinter der Variable beeinflusst werden:
+* combo box:  value = 0; // [0,1,2,3,4]
+* slider: value = 1; // [start:step:end]
+* checkbox: value = true;
+* spinbox: value = 1.0; // .1
+* vector: value = [0,90,-90];    
+
+---
+
+# 6. Übung
+
+Erzeuge aus einem deiner Beispiel Sketche ein parametrisierbares Objekt, das mit dem Customizer verändert werden kann. 
 
 ---
 

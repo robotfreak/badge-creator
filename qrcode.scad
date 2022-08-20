@@ -29,6 +29,7 @@ qr_data = [[1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,0,0,0,1,1,1,1,1,1,1],
 
 // Render QR code with default settings (module 1x1x1)
 qr_render(qr_data);
+//projection() qr_render(qr_data);
 
 // QR code rendering method
 module qr_render(data=qr_data, module_size = 1, height = 1) {
