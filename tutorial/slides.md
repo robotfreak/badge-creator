@@ -152,11 +152,7 @@ Vorlagen zu frei verwendbaren SVG Files findet man z.B. unter:
 
 # 1. Übung
 
-Erzeuge aus dem Beispiel **uebung2.scad**
-
-Als erste Übung
-
-Erzeuge aus dem Beispiel **uebung2.scad** könnt ihr ein persönliches Badge erstellen, z.B. ein Namensschild, einen Schlüsselanhänger oder einen Chip für Einkaufswagen.
+Erzeuge aus dem Beispiel **badge-creator.scad**  ein persönliches Badge, z.B. ein Namensschild, einen Schlüsselanhänger oder einen Chip für Einkaufswagen.
 
 ![width:300px](berlin-creator-keychain.png) ![width:300px](berlin-creator-qrcode.png) ![width:300px](bulb-coin.png)
 
@@ -191,7 +187,7 @@ Der Befehl **cube** zeichnet einen Würfel mit der Kantenlänge als Parameter. E
 
 ---
 
-# Beispiele Würfel
+# Beispiele: Würfel
 
 Die folgenden Beispiele zeichnen einen Würfel mit 10mm Kantenläge, einen zentrierten Würfel mit 10mm Kantenläge und einen Quader mit 30x20x10mm (x,y,z) Kantenlänge.
 
@@ -209,7 +205,7 @@ Der Befehl **cylinder** zeichnet einen Zylinder. Als Parameter kann der Radius r
 
 ---
 
-# Beispiele Zylinder
+# Beispiele: Zylinder
 
 Die folgenden Beispiele zeichen einen Zylinder, einen spitzen und einen stumpfen Kegel. 
 cylinder(h=30, r=10); 
@@ -226,7 +222,7 @@ Die Anzahl der Ecken kann über den Parameter $fn bestimmt werden. Je höher des
 
 ---
 
-# Beispiele Kugel 
+# Beispiele: Kugel 
 
 Die folgenden Beispiele zeichen Kugeln mit 8, 30 und 100 Ecken.
 
@@ -286,11 +282,7 @@ Beachte hier, dass der Würfel zentriert ist (center=true). Dann liegt die Rotat
 
 # 2. Übung
 
-Erzeuge aus dem Beispiel **uebung2.scad**
-
-Mit den bisher vorgestellten Befehlen lässt sich bereits einges anfangen. Als Übung
-
-Erzeuge aus dem Beispiel **uebung2.scad** soll eine aus Grundkörpern zusammengesetze Gebäude erstellt werden, z.B. ein Haus, ein Turm, oder eine Brücke. Benutze translate und rotate um die Grundkörper im Raum anzuordnen bzw. zu drehen.
+Mit den bisher vorgestellten Befehlen lässt sich bereits einges anfangen. Zur Übung soll eine aus Grundkörpern zusammengesetzes Gebäude erstellt werden, z.B. ein Haus, ein Turm, oder eine Brücke. Benutze translate und rotate um die Grundkörper im Raum anzuordnen bzw. zu drehen.
 
 ![width:300px](haus.png) ![width:300px](turm.png) ![width:300px](bruecke.png)
 
@@ -306,7 +298,7 @@ Zu den Mengenoperationen (boolsche Operationen) in OpenSCAD zählen:
 
 ---
 
-# Zusammenfassen - union
+# union
 
 Syntax: union() { object1(); object2(); }
 
@@ -316,7 +308,7 @@ Der Befehl **union** fasst mehrere Objekte zu einem Objekt zusammen. Auf das zus
 
 ---
 
-# Differenz - difference
+# difference
 
 Syntax: difference() { object1(); object2(); }
 
@@ -326,7 +318,7 @@ Der Befehl **difference** zieht vom ersten angegebenen Objekt die folgenden Obje
 
 ---
 
-# Schnittmenge - intersection
+# intersection
 
 Syntax: intersection() { object1(); object2(); }
 
@@ -338,24 +330,9 @@ Der Befehl **intersection** bildet die Schnittmenge von Objekten.
 
 # 3. Übung
 
-Erzeuge aus dem Beispiel **uebung2.scad**
-
 ![bg left:40% 80%](pokal.png)
 
-Mit den Mengenoperatoren lassen sich nun auch Hohlkörper wie eine Gehäusebox o.ä erstellen, ebenso wie Bohrungen in Objekten erzeugen. Als Übung
-
-Erzeuge aus dem Beispiel **uebung2.scad** soll ein Pokal erstellt werden.
-
----
-
-# Module
-
-Syntax: module name( parameter ) { action }
-
-OpenSCAD lässt sich mit eigenen Befehlen erweitern. Dazu wird der Befehl **module** benutzt. Module können Parameter besitzen 
-
-Aufrufen lässt sich ein Modul mit: 
-name( parameter values );
+Mit den Mengenoperatoren lassen sich nun auch Hohlkörper wie z.B. eine Gehäusebox o.ä erstellen, ebenso wie Bohrungen in Objekten erzeugen. Als Übung soll ein Pokal erstellt werden.
 
 ---
 
@@ -410,23 +387,20 @@ rotate_extrude(angle=360) translate([20, 0])circle(d=5, $fn=30);
 
 ---
 
-# Include 
+# import
 
-Syntax: include <....scad>
+Syntax: import("...ext")
 
-Mit dem Befehl **include** lassen sich Bibliotheken in eigene Skripte einbinden. Bibliotheken sind nichts anderes als SCAD Skripte. Es gibt diverse Bibliotheken zu allen möglichen Schwerpunkten wie z.B.:
-Gewinde, Gehäuse, Round Anything, etc.
-
-Nähere Infos finden sich unter https://openscad.org/libraries.html
+Mit **import** lassen sich 2D Objekte wie z.B: SVG Files in OpenSCAD importieren. 
+Auch 3D Objekte wie STL Files lassen sich mit import importieren. Anhand der Datei Extension erkennt OpenSCAD das Format der Datei.
 
 ---
 
-# Use
+# scale
 
-Syntax: use <....scad>
+Syntax scale([x,y,z]) object();
 
-Mit dem Befehl **use** lassen sich ähnlich wie mit include Bibliotheken in eigene Skripte einbinden. Der einzige Unterschied zu include ist:
-Bei use werden nur Module und Funktionen aus der Bibliothek übernommen. Include übernimmt alles.
+Mit **scale** kann ein 3D Oject in den 3 Raumachsen skaliert werden. Das ist insbesondere bei importierten Objekten wichtig.
 
 ---
 
@@ -450,11 +424,7 @@ Mit dem Befehl **minkowski** lässt sich die Minkowski Summe von 2 Objekten bild
 
 # 4. Übung
 
-Erzeuge aus dem Beispiel **uebung2.scad**
-
-Als weitere Übung
-
-Erzeuge aus dem Beispiel **uebung2.scad** entwerfe einen Quader mit abgerundeten Ecken. Verwende dazu Die Funktionen **hull()** oder **minkowski()**
+Erzeuge einen Quader mit abgerundeten Ecken. Verwende dazu Die Funktionen **hull()** oder **minkowski()**
 
 ![width:300px](minkowski.png) 
 
@@ -491,6 +461,48 @@ Trifft die Bedingung nicht zu werden die Befehle aus dem else Zweig ausgeführt.
 Öffne die Datei **uebung2.scad** aus dem examples Ordner und erzeuge mit Hilfe von **for** Schleifen eine Stadt aus den vorhandenen Bauwerken.
 
 Bonus Aufgabe: Nutze **if else** Abfragen um mehr Abwechslung (Zufall) in die Stadt zu bringen
+ 
+---
+
+# Module
+
+Syntax: module name( parameter ) { action }
+
+OpenSCAD lässt sich mit eigenen Befehlen erweitern. Dazu wird der Befehl **module** benutzt. Module können Parameter besitzen 
+
+Aufrufen lässt sich ein Modul mit: 
+name( parameter values );
+
+---
+
+# Include 
+
+Syntax: include <....scad>
+
+Mit dem Befehl **include** lassen sich Bibliotheken in eigene Skripte einbinden. Bibliotheken sind nichts anderes als SCAD Skripte. Es gibt diverse Bibliotheken zu allen möglichen Schwerpunkten wie z.B.:
+Gewinde, Gehäuse, Round Anything, etc.
+
+Nähere Infos zu Bibliotheken finden sich unter https://openscad.org/libraries.html
+
+---
+
+# Use
+
+Syntax: use <....scad>
+
+Mit dem Befehl **use** lassen sich ähnlich wie mit include Bibliotheken in eigene Skripte einbinden. Der einzige Unterschied zu include ist:
+Bei use werden nur Module und Funktionen aus der Bibliothek übernommen. Include übernimmt alles.
+
+--- 
+
+# Bibliotheken
+
+Einige OpenSCAD Beispiel Bibliotheken:
+
+* https://github.com/openscad/MCAD 
+* https://github.com/openscad/scad-utils
+* https://github.com/revarbat/BOSL
+* https://github.com/JustinSDK/dotSCAD
 
 ---
 
@@ -517,8 +529,11 @@ Erzeuge aus einem deiner Beispiel Sketche ein parametrisierbares Objekt, das mit
 
 ---
 
-# Weitere Tutorials
+![bg left:40% 80%](Openscad.svg)
 
-* https://openscad.org/documentation-articles.html#makerbot-blog
+# Thats all folks ...
+
+
 * http://www.knopper.net/bw/gdi/OpenScad-Tutorial.pdf
+* https://openscad.org/documentation-articles.html#makerbot-blog
 * https://www.youtube.com/watch?v=10uErKRSe8E&list=PLZ89Fw0KZGPzrNtcVRDutvuOsVAHZNa20
