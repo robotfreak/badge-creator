@@ -2,6 +2,8 @@
 // pokal.scad
 // (c) berlincreators.de
 
+$fn=32; // [6:2:100]
+
 difference() {
     union() {
         translate([0,0,30]) cylinder(d2=10, d1=30, h=100);
